@@ -23,6 +23,10 @@ li {
   font-weight: 100;
   height: 19px;
   width: 618px;
+  text-transform: capitalize;
+}
+a {
+  text-decoration: none;
 }
 
 .weather-app {
