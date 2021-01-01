@@ -7,6 +7,7 @@ h1 {
   font-size: 24px;
   font-weight: 100;
   line-height: 28px;
+  margin-bottom: 0;
 }
 
 ul {
@@ -21,8 +22,7 @@ li {
   padding: 0;
   font-size: 16px;
   font-weight: 100;
-  height: 19px;
-  width: 618px;
+  line-height: 19px;
 }
 
 li:first-letter {
@@ -33,14 +33,15 @@ a {
   text-decoration: none;
 }
 
+.weather-app-wrapper {
+  max-width: 600px;
+  margin: 30px auto;
+}
+
 .weather-app {
   padding: 20px;
   border: 1px solid#dadde1;
   border-radius: 5px;
-}
-.weather-app-wrapper {
-  max-width: 600px;
-  margin: 30px auto;
 }
 
 .overview {
