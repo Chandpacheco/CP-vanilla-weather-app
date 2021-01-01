@@ -23,8 +23,12 @@ li {
   font-weight: 100;
   height: 19px;
   width: 618px;
+}
+
+li:first-letter {
   text-transform: capitalize;
 }
+
 a {
   text-decoration: none;
 }
