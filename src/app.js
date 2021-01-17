@@ -166,6 +166,9 @@ function displayFahrenheitTemperature(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+  let feelsLikeElement = document.querySelector("#feels-like");
+  feelsLikeElement.innerHTML = Math.round(fahrenheitTemperature);
+
   document.querySelectorAll(".forecast-max").forEach(function (item) {
     let currentMaxTemp = item.innerHTML;
     item.innerHTML = Math.round(currentMaxTemp * (9 / 5) + 32);
