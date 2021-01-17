@@ -66,9 +66,10 @@ function displayForecast(response) {
                 forecast.weather[0].icon
               }@2x.png" alt="${forecast.weather[0].icon}" />
               <div class="weather-forecast-temperature">
-                <strong>${Math.round(forecast.temp.max)}°</strong> ${Math.round(
-      forecast.temp.min
-    )}°
+                <strong><span id ="forecast-max">${Math.round(
+                  forecast.temp.max
+                )}°</span></strong> 
+                <span id="forecast-min">${Math.round(forecast.temp.min)}</span>°
               </div>
             </div>`;
   }
@@ -83,6 +84,7 @@ function displayTemperature(response) {
   let windElement = document.querySelector("#wind");
   let dateElement = document.querySelector("#date");
   let iconElement = document.querySelector("#icon");
+  let feelsLikeElement = document.querySelector("#feels-like");
 
   fahrenheitTemperature = response.data.main.temp;
 
@@ -97,6 +99,7 @@ function displayTemperature(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+  feelsLikeElement.innerHTML = Math.round(response.data.main.feels_like);
 
   let apiKey = "627c6f2c2be9acd5320a6d4d29514279";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${response.data.coord.lat}&lon=${response.data.coord.lon}&exclude=hourly,minutely&appid=${apiKey}&units=imperial`;
@@ -140,14 +143,36 @@ function displayCelsiusTemperature(event) {
   event.preventDefault();
   let celsiusTemperature = ((fahrenheitTemperature - 32) * 5) / 9;
   let temperatureElement = document.querySelector("#temperature");
+  let feelsLikeElement = document.querySelector("#feels-like");
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  feelsLikeElement.innerHTML = Math.round(celsiusTemperature);
+
+  document.querySelectorAll("#forecast-max").forEach(function (item) {
+    let currentTemp = item.innerHTML;
+    item.innerHTML = Math.round(((currentTemp - 32) * 5) / 9);
+  });
+  document.querySelectorAll("#forecast-min").forEach(function (item) {
+    let currentTemp = item.innerHTML;
+    item.innerHTML = Math.round(((currentTemp - 32) * 5) / 9);
+  });
+
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
 }
+
 function displayFahrenheitTemperature(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+  document.querySelectorAll("#forecast-max").forEach(function (item) {
+    let currentMaxTemp = item.innerHTML;
+    item.innerHTML = Math.round(currentMaxTemp * (9 / 5) + 32);
+  });
+  document.querySelectorAll("#forecast-min").forEach(function (item) {
+    let currentMinTemp = item.innerHTML;
+    item.innerHTML = Math.round(currentMinTemp * (9 / 5) + 32);
+  });
+
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
 }
