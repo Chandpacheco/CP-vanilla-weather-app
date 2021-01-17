@@ -56,11 +56,12 @@ function displayForecast(response) {
   forecastElement.innerHTML = null;
   let forecast = null;
 
-  for (let index = 0; index < 6; index++) {
+  for (let index = 1; index < 7; index++) {
     forecast = response.data.daily[index];
+
     forecastElement.innerHTML += `
    <div class="col-2">
-              <h3>${formatHours(forecast.dt * 1000)}</h3>
+              <h3>${formatDay(forecast.dt * 1000)}</h3>
               <img src="http://openweathermap.org/img/wn/${
                 forecast.weather[0].icon
               }@2x.png" alt="${forecast.weather[0].icon}" />
@@ -83,9 +84,9 @@ function displayTemperature(response) {
   let dateElement = document.querySelector("#date");
   let iconElement = document.querySelector("#icon");
 
-  celsiusTemperature = response.data.main.temp;
+  fahrenheitTemperature = response.data.main.temp;
 
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
   cityElement.innerHTML = response.data.name;
   descriptionElement.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
@@ -139,14 +140,14 @@ function displayCelsiusTemperature(event) {
   event.preventDefault();
   let celsiusTemperature = ((fahrenheitTemperature - 32) * 5) / 9;
   let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
 }
 function displayFahrenheitTemperature(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
 }
