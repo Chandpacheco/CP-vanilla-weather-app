@@ -66,10 +66,12 @@ function displayForecast(response) {
                 forecast.weather[0].icon
               }@2x.png" alt="${forecast.weather[0].icon}" />
               <div class="weather-forecast-temperature">
-                <strong><span id ="forecast-max">${Math.round(
+                <strong><span class ="forecast-max">${Math.round(
                   forecast.temp.max
-                )}°</span></strong> 
-                <span id="forecast-min">${Math.round(forecast.temp.min)}</span>°
+                )}</span>°</strong> 
+                <span class="forecast-min">${Math.round(
+                  forecast.temp.min
+                )}</span>°
               </div>
             </div>`;
   }
@@ -147,11 +149,11 @@ function displayCelsiusTemperature(event) {
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
   feelsLikeElement.innerHTML = Math.round(celsiusTemperature);
 
-  document.querySelectorAll("#forecast-max").forEach(function (item) {
+  document.querySelectorAll(".forecast-max").forEach(function (item) {
     let currentTemp = item.innerHTML;
     item.innerHTML = Math.round(((currentTemp - 32) * 5) / 9);
   });
-  document.querySelectorAll("#forecast-min").forEach(function (item) {
+  document.querySelectorAll(".forecast-min").forEach(function (item) {
     let currentTemp = item.innerHTML;
     item.innerHTML = Math.round(((currentTemp - 32) * 5) / 9);
   });
@@ -164,11 +166,11 @@ function displayFahrenheitTemperature(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
-  document.querySelectorAll("#forecast-max").forEach(function (item) {
+  document.querySelectorAll(".forecast-max").forEach(function (item) {
     let currentMaxTemp = item.innerHTML;
     item.innerHTML = Math.round(currentMaxTemp * (9 / 5) + 32);
   });
-  document.querySelectorAll("#forecast-min").forEach(function (item) {
+  document.querySelectorAll(".forecast-min").forEach(function (item) {
     let currentMinTemp = item.innerHTML;
     item.innerHTML = Math.round(currentMinTemp * (9 / 5) + 32);
   });
